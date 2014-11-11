@@ -46,10 +46,10 @@
 			<Add option="-Wmain" />
 			<Add option="-pedantic" />
 			<Add option="-Wzero-as-null-pointer-constant" />
-			<Add option="-std=c++11" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-std=c++1y" />
 		</Compiler>
 		<Linker>
 			<Add option="-static" />
@@ -61,6 +61,8 @@
 			<Mode after="always" />
 		</ExtraCommands>
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/process/instruction.cpp" />
+		<Unit filename="src/process/instruction.h" />
 		<Unit filename="src/process/process.cpp" />
 		<Unit filename="src/process/process.h" />
 		<Unit filename="src/process/program.cpp" />

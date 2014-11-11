@@ -3,15 +3,15 @@
 
     #include <string>
     #include <vector>
+    #include "instruction.h"
 
 class Program
 {
     public:
-        Program(std::string& fileName);
-        Program(std::string&& fileName);
-    protected:
+        Program(const std::string& fileName);
+        Program(const std::string&& fileName);
     private:
-        std::vector<std::string> lines;
+        std::vector<Instruction> instructions{};
         std::string path{"programs/"};
 };
 

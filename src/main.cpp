@@ -1,12 +1,17 @@
 #include <iostream>
-#include <unordered_map>
 #include <list>
 #include <string>
 #include <fstream>
+#include <stdexcept>
+#include <unordered_map>
 #include "util/console.h"
 #include "process/program.h"
 
-void print_help();
+void print_help(){
+    std::cout << color::yellow << "Utilizacao:" << std::endl
+              << "  GROSS <arquivo de simulacao>" << std::endl
+              << "    exemplo: GROSS simTest.txt" << color::unset;
+}
 
 int main(int argc, char** argv){
     if(argc <= 1){
@@ -15,46 +20,39 @@ int main(int argc, char** argv){
     }
 
     std::ifstream in(argv[1]);
+    std::unordered_map<std::string, Program> loaded_programs;
+//    std::list<Process> tempProcessList;
+
     if(in.is_open()){
         std::string str_program;
         std::string str_priority;
-        std::unordered_map<std::string, Program> loaded_programs;
-        std::list<Process> procList;
 
-
-        while(in >> str_program >> str_priority){
-            std::cout << "|" << str_program << "|" << str_priority << "|" << std::endl;
-            try{
+        try{
+            while(in >> str_program >> str_priority){
                 if(!loaded_programs.count(str_program)){
                     loaded_programs.emplace(str_program, str_program); // nome, Program
                 }
 
+                try{
+                    int priority = std::stoi(str_priority);
+                    if(priority <= 0)
+                        throw std::domain_error("A prioridade '" + str_priority + "' deve ser positiva");
+                    std::cout << "|" << str_program << "|" << priority << "|" << std::endl;
 
-                int priority = std::stoi(str_priority);
-                //        Process p();
-/*
-            } catch(const std::ifstream::failure& ex){
-                std::cout << color::red << "Nao foi possivel encontrar o arquivo "
-                          << color::yellow << str_program << color::unset << std::endl;
-*/
-            } catch (const std::exception& ex){
-                std::cout << color::red << "A prioridade '"
-                          << color::yellow << str_priority
-                          << color::red << "' nao e valida" << color::unset;
+                } catch (const std::invalid_argument& ex){
+                    std::string what = "A prioridade '" + str_priority + "' nao e valida";
+                    throw std::invalid_argument {what};
+                }
             }
+        } catch (const std::exception& ex){
+            print_error(ex.what());
+            return 0;
         }
+
     } else {
-        color::print("Arquivo nao pode ser aberto.", color::red);
+        print_error("Arquivo nao pode ser aberto.");
     }
 
-
+//    manager.run();
     return 0;
-}
-
-void print_help(){
-    color::setColor(color::yellow);
-    std::cout << "Utilizacao:" << std::endl
-              << "  GROSS <arquivo de simulacao>" << std::endl
-              << "    exemplo: GROSS simTest.txt";
-    color::unsetColor();
 }
