@@ -7,11 +7,7 @@
 #include "util/console.h"
 #include "process/program.h"
 
-void print_help(){
-    std::cout << color::yellow << "Utilizacao:" << std::endl
-              << "  GROSS <arquivo de simulacao>" << std::endl
-              << "    exemplo: GROSS simTest.txt" << color::unset;
-}
+void print_help();
 
 int main(int argc, char** argv){
     if(argc <= 1){
@@ -29,6 +25,8 @@ int main(int argc, char** argv){
 
         try{
             while(in >> str_program >> str_priority){
+                    // carregar sheduler
+
                 if(!loaded_programs.count(str_program)){
                     loaded_programs.emplace(str_program, str_program); // nome, Program
                 }
@@ -55,4 +53,10 @@ int main(int argc, char** argv){
 
 //    manager.run();
     return 0;
+}
+
+void print_help(){
+    std::cout << color::yellow << "Utilizacao:" << std::endl
+              << "  GROSS <arquivo de simulacao>" << std::endl
+              << "    exemplo: GROSS simTest.txt" << color::unset;
 }

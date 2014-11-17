@@ -1,5 +1,5 @@
 #include "process.h"
 
-Process::Process(){
+Process::Process(int prio) : priority(prio){
 
 }
