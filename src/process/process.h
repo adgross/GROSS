@@ -4,7 +4,7 @@
 class Process
 {
     public:
-        Process(int prio);
+        Process(int prio); // programa associado ao processo
     protected:
     private:
         int PID{0};

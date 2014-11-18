@@ -1,0 +1,5 @@
+escalonador sched_fifo
+cpuIntensive 4
+cpuIntensive 3
+cpuIntensive 8
+cpuIntensive 1

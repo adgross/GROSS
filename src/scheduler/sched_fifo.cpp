@@ -1,26 +1,28 @@
 #include "sched_fifo.h"
 
-sched_fifo::sched_fifo() : Scheduler("sched_fifo") {
+#include <iostream>
 
+Sched_FIFO sched_fifo_obj;
+
+Sched_FIFO::Sched_FIFO() : Scheduler("sched_fifo") {}
+
+void Sched_FIFO::start_to_queue(){
+    std::cout << __func__ << std::endl;
 }
 
-void sched_fifo::start_to_queue(){
-
+void Sched_FIFO::cpu_to_queue(){
+    std::cout << __func__ << std::endl;
 }
 
-void sched_fifo::cpu_to_queue(){
-
+void Sched_FIFO::cpu_to_io(){
+    std::cout << __func__ << std::endl;
 }
 
-void sched_fifo::cpu_to_io(){
-
+void Sched_FIFO::cpu_to_end(){
+    std::cout << __func__ << std::endl;
 }
 
-void sched_fifo::cpu_to_end(){
-
-}
-
-void sched_fifo::io_to_queue(){
-
+void Sched_FIFO::io_to_queue(){
+    std::cout << __func__ << std::endl;
 }
 

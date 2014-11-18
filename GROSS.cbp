@@ -50,15 +50,14 @@
 			<Add option="-Wmain" />
 			<Add option="-pedantic" />
 			<Add option="-Wzero-as-null-pointer-constant" />
+			<Add option="-std=c++11" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add option="-std=c++1y" />
 		</Compiler>
 		<Linker>
 			<Add option="-static" />
 			<Add option="-static-libgcc" />
-			<Add option="-static-libstdc++" />
 		</Linker>
 		<ExtraCommands>
 			<Add after='cmd /c copy &quot;$(PROJECT_DIR)$(TARGET_OUTPUT_FILE)&quot; $(PROJECT_DIR)test\GROSS.exe&quot;' />
@@ -81,8 +80,6 @@
 		<Unit filename="src/scheduler/scheduler.h" />
 		<Unit filename="src/util/console.cpp" />
 		<Unit filename="src/util/console.h" />
-		<Unit filename="src/util/sleep.cpp" />
-		<Unit filename="src/util/sleep.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -2,7 +2,7 @@
 #include <string>
 #include <sstream>
 
-Instruction::Instruction(const std::string& str){
+Instruction::Instruction(std::string const& str){
     std::stringstream ss{str};
     ss >> device >> time;
 

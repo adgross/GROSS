@@ -11,6 +11,7 @@ class Scheduler
         Scheduler(const std::string&& name);
         virtual ~Scheduler();
         static Scheduler* getInstance(const std::string& sched_name);
+        static Scheduler* getInstance(const std::string&& sched_name);
 
     // eventos
         virtual void start_to_queue() = 0;
@@ -20,7 +21,7 @@ class Scheduler
         virtual void cpu_to_end() = 0;
         virtual void io_to_queue() = 0;
     protected:
-
+        // manager
     private:
         std::string const sched_name;
         static std::map<std::string, Scheduler*> schedulers;

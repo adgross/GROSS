@@ -14,8 +14,8 @@ namespace color{
                 darkGray,     blue,     green,     cyan,     red,     pink,     yellow, white };
     enum colors_unset { unset }; // enum para resetar quando utilizado com algum ostream - utilizando sobrecarga de método ao invés de verificações extras
 
-    void print(const std::string& msg, colors_t color);
-    void print(const std::string&& msg, colors_t color);
+    void print(std::string const& msg, colors_t color);
+    void print(std::string const&& msg, colors_t color);
     void setColor(colors_t color);
     void unsetColor();
 
@@ -23,9 +23,9 @@ namespace color{
     std::ostream& operator<<(std::ostream& os, colors_unset c);
 }
 
-void print_warning(const std::string& error_msg);
-void print_warning(const std::string&& error_msg);
-void print_error(const std::string& error_msg);
-void print_error(const std::string&& error_msg);
+void print_warning(std::string const& error_msg);
+void print_warning(std::string const&& error_msg);
+void print_error(std::string const& error_msg);
+void print_error(std::string const&& error_msg);
 
 #endif // CONSOLE_H

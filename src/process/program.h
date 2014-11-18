@@ -8,11 +8,15 @@
 class Program
 {
     public:
-        Program(const std::string& fileName);
-        Program(const std::string&& fileName);
+        Program(std::string const& fileName);
+        Program(std::string const&& fileName);
+        int get_size() const;
+        std::string get_name() const;
+        Instruction const& get_instruction(int index) const;
     private:
         std::vector<Instruction> instructions{};
         std::string path{"programs/"};
+        std::string prog_name;
 };
 
 #endif // PROGRAM_H

@@ -3,10 +3,10 @@
 #include <string>
 
 namespace color{
-    void print(const std::string&& msg, colors_t color){
+    void print(std::string const&& msg, colors_t color){
         print(msg, color);
     }
-    void print(const std::string& msg, colors_t color){
+    void print(std::string const& msg, colors_t color){
         setColor(color);
         std::cout << msg;
         unsetColor();
@@ -55,16 +55,16 @@ namespace color{
 
 }
 
-void print_warning(const std::string& error_msg){
+void print_warning(std::string const& error_msg){
     color::print(error_msg, color::red);
 }
-void print_warning(const std::string&& error_msg){
+void print_warning(std::string const&& error_msg){
     color::print(error_msg, color::red);
 }
 
-void print_error(const std::string& error_msg){
+void print_error(std::string const& error_msg){
     color::print(error_msg, color::red);
 }
-void print_error(const std::string&& error_msg){
+void print_error(std::string const&& error_msg){
     color::print(error_msg, color::red);
 }

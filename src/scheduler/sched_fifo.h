@@ -5,10 +5,10 @@
 #include "scheduler.h"
 
 
-class sched_fifo : public Scheduler
+class Sched_FIFO : public Scheduler
 {
     public:
-        sched_fifo();
+        Sched_FIFO();
         void start_to_queue() override;
         void cpu_to_queue() override;
         void cpu_to_io() override;
@@ -16,6 +16,6 @@ class sched_fifo : public Scheduler
         void io_to_queue() override;
     private:
         std::queue<Process> queue{};
-} sched_fifo;
+};
 
 #endif // SCHED_FIFO_H

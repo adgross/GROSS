@@ -5,9 +5,9 @@
 
 struct Instruction
 {
-    Instruction(const std::string& str);
+    Instruction(std::string const& str);
 
-    std::string device;
+    std::string device{};
     int time{0};
 };
 
