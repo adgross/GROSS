@@ -17,6 +17,7 @@
 					<Add directory="src/process" />
 					<Add directory="src/scheduler" />
 					<Add directory="src" />
+					<Add directory="src/util" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -29,6 +30,7 @@
 					<Add directory="src/process" />
 					<Add directory="src/scheduler" />
 					<Add directory="src" />
+					<Add directory="src/util" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

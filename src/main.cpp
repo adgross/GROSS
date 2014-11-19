@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include <unordered_map>
 #include "manager.h"
-#include "util/console.h"
-#include "process/program.h"
-#include "process/proc.h"
+#include "console.h"
+#include "program.h"
+#include "proc.h"
 
 void print_help();
 
