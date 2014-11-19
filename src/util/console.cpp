@@ -56,10 +56,10 @@ namespace color{
 }
 
 void print_warning(std::string const& error_msg){
-    color::print(error_msg, color::red);
+    color::print(error_msg, color::darkYellow);
 }
 void print_warning(std::string const&& error_msg){
-    color::print(error_msg, color::red);
+    color::print(error_msg, color::darkYellow);
 }
 
 void print_error(std::string const& error_msg){

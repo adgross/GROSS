@@ -6,8 +6,20 @@ Sched_FIFO sched_fifo_obj;
 
 Sched_FIFO::Sched_FIFO() : Scheduler("sched_fifo") {}
 
-void Sched_FIFO::start_to_queue(){
+void Sched_FIFO::start(ProcList p){
     std::cout << __func__ << std::endl;
+
+    for(auto& i : p){
+        q.push(i);
+    }
+
+    manager->sendToCPU(q.front());
+}
+
+void Sched_FIFO::start_to_queue(ProcPtr p){
+    std::cout << __func__ << std::endl;
+
+    q.push(p);
 }
 
 void Sched_FIFO::cpu_to_queue(){

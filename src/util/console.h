@@ -1,13 +1,13 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
-    #include<string>
+#include<string>
 
-	#ifdef _WIN32
-        #include<windows.h>
-    #else
-		#include<map>
-    #endif
+#ifdef _WIN32
+    #include<windows.h>
+#else
+    #include<map>
+#endif
 
 namespace color{
     enum colors_t {black, darkBlue, darkGreen, darkCyan, darkRed, darkPink, darkYellow, gray,

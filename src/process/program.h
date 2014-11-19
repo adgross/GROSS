@@ -1,9 +1,9 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-    #include <string>
-    #include <vector>
-    #include "instruction.h"
+#include <string>
+#include <vector>
+#include "instruction.h"
 
 class Program
 {

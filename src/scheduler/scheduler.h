@@ -3,6 +3,8 @@
 
 #include <string>
 #include <map>
+#include "process.h"
+#include "manager.h"
 
 class Scheduler
 {
@@ -14,15 +16,19 @@ class Scheduler
         static Scheduler* getInstance(const std::string&& sched_name);
 
     // eventos
-        virtual void start_to_queue() = 0;
+        virtual void start(ProcList p) = 0; // setup do scheduler + primeira execução
+        virtual void start_to_queue(ProcPtr p) = 0;
       //  virtual void queue_to_cpu() = 0; tarefa do escalonador e não evento
         virtual void cpu_to_queue() = 0;
         virtual void cpu_to_io() = 0;
         virtual void cpu_to_end() = 0;
         virtual void io_to_queue() = 0;
     protected:
-        // manager
+        Manager* manager = nullptr;
     private:
+        Scheduler (const Scheduler&) = delete;
+        Scheduler& operator=(Scheduler const&) = delete;
+
         std::string const sched_name;
         static std::map<std::string, Scheduler*> schedulers;
 };

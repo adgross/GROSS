@@ -1,13 +1,13 @@
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
 
-    #include <string>
+#include <string>
 
 struct Instruction
 {
     Instruction(std::string const& str);
 
-    std::string device{};
+    std::string command{};
     int time{0};
 };
 

@@ -38,6 +38,7 @@
 		<Compiler>
 			<Add option="-Wnon-virtual-dtor" />
 			<Add option="-Winit-self" />
+			<Add option="-Wredundant-decls" />
 			<Add option="-Wcast-align" />
 			<Add option="-Wundef" />
 			<Add option="-Wfloat-equal" />
@@ -70,8 +71,10 @@
 		<Unit filename="src/process/cpu.h" />
 		<Unit filename="src/process/instruction.cpp" />
 		<Unit filename="src/process/instruction.h" />
-		<Unit filename="src/process/process.cpp" />
-		<Unit filename="src/process/process.h" />
+		<Unit filename="src/process/irq.cpp" />
+		<Unit filename="src/process/irq.h" />
+		<Unit filename="src/process/proc.cpp" />
+		<Unit filename="src/process/proc.h" />
 		<Unit filename="src/process/program.cpp" />
 		<Unit filename="src/process/program.h" />
 		<Unit filename="src/scheduler/sched_fifo.cpp" />
