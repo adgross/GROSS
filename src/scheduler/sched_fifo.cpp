@@ -1,40 +1,32 @@
 #include "sched_fifo.h"
 
-#include <iostream>
-
 Sched_FIFO sched_fifo_obj;
 
 Sched_FIFO::Sched_FIFO() : Scheduler("sched_fifo") {}
 
-void Sched_FIFO::start(ProcList p){
-    std::cout << __func__ << std::endl;
-
+void Sched_FIFO::setup(std::vector<ProcPtr> const&  p){
     for(auto& i : p){
         q.push(i);
     }
-
-    manager->sendToCPU(q.front());
 }
 
-void Sched_FIFO::start_to_queue(ProcPtr p){
-    std::cout << __func__ << std::endl;
+void Sched_FIFO::update(){
+    ProcPtr p = next();
 
-    q.push(p);
+    if(p->getState() == READY && manager->isCPUEmpty()){
+        manager->sendToCPU(p);
+    }
 }
 
-void Sched_FIFO::cpu_to_queue(){
-    std::cout << __func__ << std::endl;
+ProcPtr Sched_FIFO::next(){
+    if(!q.empty()){
+        if(q.front()->getState() == DESTROYED){
+            q.pop();
+            return next();
+        } else {
+            return q.front();
+        }
+    } else {             // simulation should finish before reach here,
+        return nullptr;  // because all processes are DESTROYED before the queue is empty
+    }
 }
-
-void Sched_FIFO::cpu_to_io(){
-    std::cout << __func__ << std::endl;
-}
-
-void Sched_FIFO::cpu_to_end(){
-    std::cout << __func__ << std::endl;
-}
-
-void Sched_FIFO::io_to_queue(){
-    std::cout << __func__ << std::endl;
-}
-

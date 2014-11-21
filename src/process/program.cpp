@@ -1,7 +1,7 @@
 #include "program.h"
+#include "functions.h"
 #include <fstream>
 #include <algorithm>
-#include <cctype>
 #include <stdexcept>
 
 Program::Program(std::string const&& fileName) : Program(fileName) {}
@@ -14,22 +14,34 @@ Program::Program(std::string const& fileName) : prog_name(fileName) {
     }
 
     std::string temp;
+    int temp_line{0};
     while( std::getline(in, temp) ){
-        if(std::all_of( temp.begin(), temp.end(), [](char& i){return std::isspace(i);} ))
+        temp_line++;
+        if(is_all_space(temp))
             continue;
-        instructions.emplace_back(temp);
+
+        try{
+            instructions.emplace_back(temp);
+        } catch(std::invalid_argument const& ex) {
+            throw std::runtime_error("Erro ao carregar " + file + ": " +
+                                      ex.what() + " na linha " + std::to_string(temp_line));
+        }
     }
     instructions.shrink_to_fit();
+
 }
 
-int Program::get_size() const {
+int Program::size() const {
     return instructions.size();
 }
 
-std::string Program::get_name() const {
+std::string Program::getName() const {
     return prog_name;
 }
 
-Instruction const& Program::get_instruction(int index) const {
+Instruction const& Program::getInstruction(int index) const {
+    return instructions.at(index);
+}
+Instruction& Program::getInstruction(int index) {
     return instructions.at(index);
 }

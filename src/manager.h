@@ -2,32 +2,37 @@
 #define MANAGER_H
 
 #include <string>
+#include <vector>
 #include <memory>
-#include <list>
+#include "scheduler.h"
 #include "proc.h"
 #include "cpu.h"
-
-class Scheduler;
 
 class Manager
 {
     public:
-        Manager(std::string const& sched_name);
+        Manager(Scheduler& sched);
         void addProcess(ProcPtr p);
         void start();
+        std::string generateReport();
 
         void sendToCPU(ProcPtr p);
-        void contextSwitch(ProcPtr p);
-        void killProcess(ProcPtr p);
-    private:
-        Manager (const Manager&) = delete;
-        Manager& operator=(Manager const&) = delete;
+        ProcPtr contextSwitch();
+        bool isCPUEmpty();
+        void callFinish();
 
-        bool running = false;
-        int time_elapsed = 0;
-        Scheduler* scheduler = nullptr;
+    private:
+        void doIO();
+        bool checkRunning();
+        void updateTimers();
+        void fail(std::string what);
+
+        bool running{false};
+        int time_elapsed{0};
+
+        std::vector<ProcPtr> process_list{};
+        Scheduler& scheduler;
         CPU cpu{};
-        ProcList process_list{};
 };
 
 #endif // MANAGER_H

@@ -2,9 +2,10 @@
 #include <fstream>
 #include <string>
 #include <memory>
-#include <algorithm>
 #include <stdexcept>
 #include <unordered_map>
+#include "functions.h"
+#include "scheduler.h"
 #include "manager.h"
 #include "console.h"
 #include "program.h"
@@ -18,7 +19,8 @@ int main(int argc, char** argv){
         return -1;
     }
 
-    std::ifstream in(argv[1]);
+    std::string file{argv[1]};
+    std::ifstream in(file);
     std::shared_ptr<Manager> mgr;
 
     if(in.is_open()){
@@ -29,17 +31,20 @@ int main(int argc, char** argv){
             std::string str_priority;
 
             in >> str_temp >> str_scheduler;
-            for_each(str_temp.begin(), str_temp.end(), tolower);
 
+            string_to_lower(str_temp);
             if(str_temp != "scheduler" && str_temp != "escalonador")
                 throw std::runtime_error("Primeiro parametro deve ser 'escalonador nome' ou 'scheduler nome'");
 
-            std::unordered_map<std::string, std::shared_ptr<Program>> loaded_programs;
-            mgr = std::make_shared<Manager>(str_scheduler);
+            std::unordered_map<std::string, Program> loaded_programs;
+
+            Scheduler& s = Scheduler::getInstance(str_scheduler);
+            mgr = std::make_shared<Manager>(s);
+            s.setManager(mgr);
 
             while(in >> str_program >> str_priority){
                 if(!loaded_programs.count(str_program)){
-                    loaded_programs.insert({str_program, std::make_shared<Program> (str_program)});
+                    loaded_programs.emplace(str_program, str_program); // nome, program
                 }
 
                 try{
@@ -60,17 +65,18 @@ int main(int argc, char** argv){
         }
 
     } else {
-        print_error("Arquivo nao pode ser aberto.");
+        print_error("Arquivo '" + file + "' nao pode ser aberto.");
         return -2;
     }
 
     try{
-        std::cout << std::endl << "START" << std::endl;
         mgr->start();
     } catch (std::exception const& ex){
         print_warning(ex.what());
         return -4;
     }
+
+    std::cout << mgr->generateReport();
 
     return 0;
 }

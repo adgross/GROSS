@@ -12,7 +12,7 @@
 namespace color{
     enum colors_t {black, darkBlue, darkGreen, darkCyan, darkRed, darkPink, darkYellow, gray,
                 darkGray,     blue,     green,     cyan,     red,     pink,     yellow, white };
-    enum colors_unset { unset }; // enum para resetar quando utilizado com algum ostream - utilizando sobrecarga de método ao invés de verificações extras
+    enum colors_unset { unset }; // enum to color reset when used with cout - made to be used as operator overload, so don't need extras checks for color_t
 
     void print(std::string const& msg, colors_t color);
     void print(std::string const&& msg, colors_t color);

@@ -2,9 +2,11 @@
 #define SCHEDULER_H
 
 #include <string>
+#include <vector>
 #include <map>
-#include "process.h"
-#include "manager.h"
+#include "proc.h"
+
+class Manager;
 
 class Scheduler
 {
@@ -12,25 +14,18 @@ class Scheduler
         Scheduler(const std::string& name);
         Scheduler(const std::string&& name);
         virtual ~Scheduler();
-        static Scheduler* getInstance(const std::string& sched_name);
-        static Scheduler* getInstance(const std::string&& sched_name);
+        static Scheduler& getInstance(const std::string& sched_name);
+        static Scheduler& getInstance(const std::string&& sched_name);
+        void setManager(std::shared_ptr<Manager> m);
 
-    // eventos
-        virtual void start(ProcList p) = 0; // setup do scheduler + primeira execução
-        virtual void start_to_queue(ProcPtr p) = 0;
-      //  virtual void queue_to_cpu() = 0; tarefa do escalonador e não evento
-        virtual void cpu_to_queue() = 0;
-        virtual void cpu_to_io() = 0;
-        virtual void cpu_to_end() = 0;
-        virtual void io_to_queue() = 0;
+        virtual void setup(std::vector<ProcPtr> const& p) = 0; // scheduler setup, before update() first run
+        virtual void update() = 0; // update will run each simulation frame/moment/clock
+
     protected:
-        Manager* manager = nullptr;
+        std::shared_ptr<Manager> manager{nullptr};
     private:
-        Scheduler (const Scheduler&) = delete;
-        Scheduler& operator=(Scheduler const&) = delete;
-
         std::string const sched_name;
-        static std::map<std::string, Scheduler*> schedulers;
+        static std::map<std::string, std::reference_wrapper<Scheduler>> schedulers;
 };
 
 #endif // SCHEDULER_H

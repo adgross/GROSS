@@ -5,6 +5,7 @@
 		<Option title="GROSS" />
 		<Option pch_mode="2" />
 		<Option compiler="gnu_gcc_compiler_491_posix_seh" />
+		<Option virtualFolders="src\;src\scheduler\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/GROSS" prefix_auto="1" extension_auto="1" />
@@ -73,18 +74,20 @@
 		<Unit filename="src/process/cpu.h" />
 		<Unit filename="src/process/instruction.cpp" />
 		<Unit filename="src/process/instruction.h" />
-		<Unit filename="src/process/irq.cpp" />
-		<Unit filename="src/process/irq.h" />
 		<Unit filename="src/process/proc.cpp" />
 		<Unit filename="src/process/proc.h" />
 		<Unit filename="src/process/program.cpp" />
 		<Unit filename="src/process/program.h" />
 		<Unit filename="src/scheduler/sched_fifo.cpp" />
-		<Unit filename="src/scheduler/sched_fifo.h" />
+		<Unit filename="src/scheduler/sched_fifo.h">
+			<Option virtualFolder="src/scheduler/" />
+		</Unit>
 		<Unit filename="src/scheduler/scheduler.cpp" />
 		<Unit filename="src/scheduler/scheduler.h" />
 		<Unit filename="src/util/console.cpp" />
 		<Unit filename="src/util/console.h" />
+		<Unit filename="src/util/functions.cpp" />
+		<Unit filename="src/util/functions.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

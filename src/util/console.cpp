@@ -48,7 +48,7 @@ namespace color{
     }
 
     std::ostream& operator<<(std::ostream& os, colors_unset c){
-        (void)c; // variavel c não é usada
+        (void)c; // c is not used
         unsetColor();
         return os;
     }

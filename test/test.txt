@@ -1,5 +1,6 @@
 escalonador sched_fifo
-cpuIntensive 4
-cpuIntensive 3
 cpuIntensive 8
-cpuIntensive 1
+cpuIntensive 2
+cpuIO 5
+ioIntensive 3
+cpuIntensive 9
