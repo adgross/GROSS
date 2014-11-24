@@ -1,6 +1,6 @@
-escalonador sched_fifo
+escalonador sched_roundrobin
 cpuIntensive 8
-cpuIntensive 2
 cpuIO 5
+ioIntensive 3
 ioIntensive 3
 cpuIntensive 9

@@ -6,7 +6,7 @@
 
 Program::Program(std::string const&& fileName) : Program(fileName) {}
 Program::Program(std::string const& fileName) : prog_name(fileName) {
-    std::string file = path + fileName + ".prog";
+    std::string file = "programs/" + fileName + ".prog";
 
     std::ifstream in(file);
     if(!in.is_open()){
@@ -31,7 +31,7 @@ Program::Program(std::string const& fileName) : prog_name(fileName) {
 
 }
 
-int Program::size() const {
+size_t Program::size() const {
     return instructions.size();
 }
 

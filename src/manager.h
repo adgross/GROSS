@@ -20,6 +20,7 @@ class Manager
         ProcPtr contextSwitch();
         bool isCPUEmpty();
         void callFinish();
+        size_t get_time_elapsed();
 
     private:
         void doIO();
@@ -28,7 +29,11 @@ class Manager
         void fail(std::string what);
 
         bool running{false};
-        int time_elapsed{0};
+        size_t time_elapsed{0};
+
+        bool didContextSwitch{false};
+        size_t contextSwitches{0};
+
 
         std::vector<ProcPtr> process_list{};
         Scheduler& scheduler;

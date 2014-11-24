@@ -1,0 +1,12 @@
+escalonador sched_roundrobin
+cpuIntensive 8
+cpuIntensive 2
+cpuIO 5
+ioIntensive 3
+cpuIO 4
+cpuIntensive 2
+ioIntensive 4
+ioIntensive 1
+ioIntensive 3
+cpuIO 7
+cpuIntensive 9

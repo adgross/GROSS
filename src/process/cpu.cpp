@@ -20,7 +20,7 @@ void CPU::execute(){
 
     Instruction& inst = proc->program.getInstruction(proc->PC);
 
-    if(inst.command == "io"){
+    if(inst.command == Instruction::IO){
         proc->setState(BLOCKED);
         proc.reset();
         return;

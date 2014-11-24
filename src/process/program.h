@@ -10,14 +10,13 @@ class Program
     public:
         Program(std::string const& fileName);
         Program(std::string const&& fileName);
-        int size() const;
+        size_t size() const;
         std::string getName() const;
         Instruction const& getInstruction(int index) const;
         Instruction& getInstruction(int index);
     private:
         std::vector<Instruction> instructions{};
-        std::string path{"programs/"};
-        std::string prog_name;
+        std::string const prog_name;
 };
 
 #endif // PROGRAM_H

@@ -6,15 +6,16 @@
 #include <queue>
 
 
-class Sched_FIFO : public Scheduler
+class Sched_RoundRobin : public Scheduler
 {
     public:
-        Sched_FIFO();
+        Sched_RoundRobin();
         void setup(std::vector<ProcPtr> const& p) override;
         void update() override;
     private:
         ProcPtr next();
         std::queue<ProcPtr> q{};
+        void frontToBack();
 };
 
 #endif // SCHED_FIFO_H

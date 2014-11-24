@@ -1,5 +1,5 @@
 process 10
-    
-	io 5
-	io 5  
+io 5
+	
+io 5
 process 8

@@ -15,8 +15,8 @@ class CPU
         ProcPtr get();
     private:
         ProcPtr proc;
-        unsigned int time_idle{0};
-        unsigned int time_not_idle{0};
+        size_t time_idle{0};
+        size_t time_not_idle{0};
 
         friend class Manager;
 };

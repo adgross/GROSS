@@ -7,8 +7,8 @@ struct Instruction
 {
     Instruction(std::string const& str);
 
-    std::string command{};
-    int time{0};
+    enum opcode : char {PROCESS, IO} command{};
+    short time{0};
 };
 
 #endif // INSTRUCTION_H
