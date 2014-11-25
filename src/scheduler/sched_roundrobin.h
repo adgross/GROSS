@@ -5,7 +5,6 @@
 #include "manager.h"
 #include <queue>
 
-
 class Sched_RoundRobin : public Scheduler
 {
     public:

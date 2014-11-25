@@ -3,12 +3,6 @@
 
 #include<string>
 
-#ifdef _WIN32
-    #include<windows.h>
-#else
-    #include<map>
-#endif
-
 namespace color{
     enum colors_t {black, darkBlue, darkGreen, darkCyan, darkRed, darkPink, darkYellow, gray,
                 darkGray,     blue,     green,     cyan,     red,     pink,     yellow, white };

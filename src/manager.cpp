@@ -1,5 +1,4 @@
 #include "manager.h"
-#include "scheduler.h"
 #include <stdexcept>
 #include <map>
 #include <limits>
@@ -13,7 +12,7 @@ void Manager::fail(std::string what){
 
 void Manager::addProcess(ProcPtr p){
     if(running){
-        fail("Nao deve-se adicionar novos processos apos iniciar a simulacao");
+        fail("Is not allowed to add new processes after starting the simulation");
     }
 
     process_list.push_back(p);
@@ -23,27 +22,31 @@ void Manager::start(){
     if(running){
         return;
     }
-    running = true;
 
     if(process_list.size() == 0){
-        fail("Nenhum processo para executar");
+        fail("No process to execute");
     }
 
+    running = true;
     scheduler.setup(process_list);
 
     while(running){
-        scheduler.update();
-        updateTimers();
-        doIO();
-        cpu.execute();
-        running = checkRunning();
-        didContextSwitch = false;
+        nextClock();
     }
+}
+
+void Manager::nextClock(){
+    scheduler.update();
+    updateTimers();
+    doIO();
+    cpu.execute();
+    running = checkRunning();
+    didContextSwitch = false;
 }
 
 std::string Manager::generateReport(){
     if(running){
-        fail("Nao deve-se gerar relatorio enquanto a simulacao estiver executando");
+        fail("Should not generate reports while the simulation is running");
     }
 
     std::stringstream ss;
@@ -114,26 +117,26 @@ void Manager::callFinish(){
 
 void Manager::sendToCPU(ProcPtr p){
     if(p==nullptr || p->PID >= process_list.size()){
-        fail("sendToCPU chamado com Processo Invalido");
+        fail("sendToCPU called with invalid process");
     }
 
     if(!isCPUEmpty()){
-        fail("Necessario Troca de Contexto antes de enviar outro processo para CPU");
+        fail("Context switch is needed before sending another process to CPU");
     }
 
     if(p->state == READY){
         cpu.set(p);
     }else{
-        fail("Estado do processo deve ser READY para ir para a CPU");
+        fail("Process state must be READY to get in CPU");
     }
 }
 ProcPtr Manager::contextSwitch(){
     if(isCPUEmpty()){
-        fail("Troca de Contexto realizada sem nenhum processo executando na CPU");
+        fail("Context switch performed without any process running on the CPU");
     }
 
     if(didContextSwitch){
-        fail("Tentativa de realizar Troca de Contexto duas vezes no mesmo clock");
+        fail("An attempt to perform context switch twice in the same clock");
     }
 
     didContextSwitch = true;

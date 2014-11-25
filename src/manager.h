@@ -23,6 +23,7 @@ class Manager
         size_t get_time_elapsed();
 
     private:
+        void nextClock();
         void doIO();
         bool checkRunning();
         void updateTimers();

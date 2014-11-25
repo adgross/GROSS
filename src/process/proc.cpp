@@ -8,8 +8,8 @@ Process::Process(Program& p, int prio) : priority(prio), program(p){
 
 void Process::setPriority(int p){
     if(p <= 0)
-        throw std::domain_error("Erro em setPriority no processo de PID " + std::to_string(PID) +
-                                 ". A prioridade '" + std::to_string(p) + "' deve ser positiva");
+        throw std::domain_error("Error calling setPriority on process " + std::to_string(PID) +
+                                 ": The priority '" + std::to_string(p) + "' must be positive");
     priority = p;
 }
 

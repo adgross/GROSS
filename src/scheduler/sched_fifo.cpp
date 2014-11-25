@@ -27,6 +27,6 @@ ProcPtr Sched_FIFO::next(){
             return q.front();
         }
     } else {             // simulation should finish before reach here,
-        return nullptr;  // because all processes are DESTROYED before the queue is empty
-    }
+        return nullptr;  // because update() is never called if all processes are DESTROYED,
+    }                    // so 'q' is never empty, because only DESTROYED processes are removed from 'q'
 }

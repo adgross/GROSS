@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 
             string_to_lower(str_temp);
             if(str_temp != "scheduler" && str_temp != "escalonador")
-                throw std::runtime_error("Primeiro parametro deve ser 'escalonador nome' ou 'scheduler nome'");
+                throw std::runtime_error("First parameter should be 'escalonador nome' or 'scheduler name'");
 
             std::unordered_map<std::string, Program> loaded_programs;
 
@@ -44,19 +44,19 @@ int main(int argc, char** argv){
 
             while(in >> str_program >> str_priority){
                 if(!loaded_programs.count(str_program)){
-                    loaded_programs.emplace(str_program, str_program); // nome, program
+                    loaded_programs.emplace(str_program, str_program); // program name, program file
                 }
 
                 try{
                     int priority = std::stoi(str_priority);
                     if(priority <= 0)
-                        throw std::domain_error("A prioridade '" + str_priority + "' deve ser positiva");
+                        throw std::domain_error("The priority '" + str_priority + "' must be positive");
 
                     auto p = std::make_shared<Process>(loaded_programs.find(str_program)->second, priority);
                     mgr->addProcess(p);
 
                 } catch (std::invalid_argument const& ex){
-                    throw std::invalid_argument {"A prioridade '" + str_priority + "' nao e valida"};
+                    throw std::invalid_argument {"The priority '" + str_priority + "' is not valid"};
                 }
             }
         } catch (std::exception const& ex){
@@ -65,7 +65,7 @@ int main(int argc, char** argv){
         }
 
     } else {
-        print_error("Arquivo '" + file + "' nao pode ser aberto.");
+        print_error("Could not open the file '" + file + "'");
         return -2;
     }
 
@@ -82,7 +82,7 @@ int main(int argc, char** argv){
 }
 
 void print_help(){
-    std::cout << color::yellow << "Utilizacao:" << std::endl
-              << "  GROSS <arquivo de simulacao>" << std::endl
-              << "    exemplo: GROSS simTest.txt" << color::unset;
+    std::cout << color::yellow << "How to use:" << std::endl
+              << "  GROSS <simulation file>" << std::endl
+              << "    example: GROSS simTest.txt" << color::unset << std::endl;
 }

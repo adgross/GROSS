@@ -1,6 +1,11 @@
 #include "console.h"
 #include <iostream>
-#include <string>
+
+#ifdef _WIN32
+    #include<windows.h>
+#else
+    #include<map>
+#endif
 
 namespace color{
     void print(std::string const&& msg, colors_t color){
@@ -8,7 +13,7 @@ namespace color{
     }
     void print(std::string const& msg, colors_t color){
         setColor(color);
-        std::cout << msg;
+        std::cout << msg << std::endl;
         unsetColor();
     }
 
@@ -17,7 +22,7 @@ namespace color{
             HANDLE cHandle = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleTextAttribute(cHandle, color);
         #else
-            static const map<colors_t, string>  colors_str
+            static std::map<colors_t, std::string>  colors_str
                     {
                         {black, "0;30"},	{darkGray,"1;30"},
                         {darkBlue,"0;34"},	{blue,"1;34"},

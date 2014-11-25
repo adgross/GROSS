@@ -10,7 +10,7 @@ Program::Program(std::string const& fileName) : prog_name(fileName) {
 
     std::ifstream in(file);
     if(!in.is_open()){
-        throw std::invalid_argument ("Arquivo " + file + " nao foi encontrado");
+        throw std::invalid_argument ("File " + file + " not found");
     }
 
     std::string temp;
@@ -23,8 +23,8 @@ Program::Program(std::string const& fileName) : prog_name(fileName) {
         try{
             instructions.emplace_back(temp);
         } catch(std::invalid_argument const& ex) {
-            throw std::runtime_error("Erro ao carregar " + file + ": " +
-                                      ex.what() + " na linha " + std::to_string(temp_line));
+            throw std::runtime_error("Error loading " + file + ": " +
+                                      ex.what() + " on line " + std::to_string(temp_line));
         }
     }
     instructions.shrink_to_fit();

@@ -17,15 +17,15 @@ Instruction::Instruction(std::string const& str){
     } else if (str_command == "io"){
         command = IO;
     } else {
-        throw std::invalid_argument("Comando '" + str_command + "' invalido");
+        throw std::invalid_argument("Invalid command '" + str_command + "'");
     }
 
     if(temp_time <= 0){
-        throw std::invalid_argument("Tempo invalido");
+        throw std::invalid_argument("Invalid clock");
     }
 
-    if(temp_time > std::numeric_limits<short>::max()){
-        throw std::invalid_argument("Tempo deve ser menor ou igual a " + std::to_string(std::numeric_limits<short>::max()));
+    if(temp_time > std::numeric_limits<unsigned short>::max()){
+        throw std::invalid_argument("Clock must be less than or equal to " + std::to_string(std::numeric_limits<unsigned short>::max()));
     }
     time = temp_time;
 
